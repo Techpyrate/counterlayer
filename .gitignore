@@ -36,6 +36,14 @@ yarn-error.log*
 # vercel
 .vercel
 
+# server-side scan store fallback
+/.data/
+
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+!.env.local.example
+

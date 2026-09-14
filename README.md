@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CounterLayer
 
-## Getting Started
+Diligence tools and practical guides for competition, consumer protection, and public compliance.
 
-First, run the development server:
+## What it does
+
+- **Report a problem** — consumer report pack with agency links and draft
+- **Scan My Business** — founder/SMB/developer questionnaire + optional public website risk scan
+- **My Rights** — role + situation intake → laws, pathways, evidence, similar cases
+- **What Can I File?** — same engine focused on agency / private avenues
+- **Similar Cases** — conduct-tag matching to curated precedent
+- **Precedent desk** — searchable/filterable case library with long-form plain-English explainers
+- **Company History** — competition records for seed companies
+- **Live Cases** — ongoing matters in the dataset
+- **Consumer Power / Before You Buy** — lock-in and switching scores
+- **Creator scripts** — YouTube / Short / Newsletter / LinkedIn from an analysis brief
+- **Reader signals** — likes, dislikes, comments, and read counts (Supabase or local demo)
+
+**Positioning:** CounterLayer is a diligence and guidance platform — not a law firm, and not a substitute for counsel on your specific facts.
+
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Supabase (likes / comments / reads)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Create a Supabase project.
+2. Run the SQL in [`supabase/schema.sql`](supabase/schema.sql) in the SQL editor.
+3. Copy `.env.local.example` → `.env.local` and fill in:
 
-## Learn More
+```bash
+NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=YOUR_ANON_KEY
+```
 
-To learn more about Next.js, take a look at the following resources:
+4. Restart `npm run dev`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Without env vars, engagement still works on **this browser** via localStorage so you can demo the UI.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Stack
 
-## Deploy on Vercel
+Next.js (App Router) · TypeScript · Tailwind CSS · Supabase · curated case library (100+ matters, 100+ companies)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Responsive layout works in mobile and desktop browsers. There is no separate native or desktop app.
