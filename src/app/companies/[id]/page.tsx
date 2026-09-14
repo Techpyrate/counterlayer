@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getCompanyWithCases } from "@/lib/analyze";
 import { buildCompanyRecord } from "@/lib/companyNarrative";
 import { CaseCard, SectionLabel } from "@/components/Ui";
+import { PageWrap } from "@/components/PageWrap";
 
 export default async function CompanyDetailPage({
   params,
@@ -16,14 +17,14 @@ export default async function CompanyDetailPage({
   const record = buildCompanyRecord(company, cases);
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-16">
+    <PageWrap narrow className="py-12 md:py-16">
       <Link href="/companies" className="text-sm text-mute hover:text-ink">
         ← Companies
       </Link>
       <SectionLabel>
         <span className="mt-6 inline-block">Competition record</span>
       </SectionLabel>
-      <h1 className="mt-3 font-[family-name:var(--font-display)] text-4xl font-bold text-ink md:text-5xl">
+      <h1 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-bold text-ink sm:text-4xl md:text-5xl">
         {company.name}
       </h1>
       <p className="mt-2 text-sm text-mute">{record.readingHint}</p>
@@ -101,7 +102,7 @@ export default async function CompanyDetailPage({
           cases.map((c) => <CaseCard key={c.id} c={c} />)
         )}
       </div>
-    </div>
+    </PageWrap>
   );
 }
 

@@ -5,6 +5,7 @@ import { lawById } from "@/data/laws";
 import { companies } from "@/data/companies";
 import { CaseEngagement } from "@/components/CaseEngagement";
 import { SectionLabel } from "@/components/Ui";
+import { PageWrap } from "@/components/PageWrap";
 
 export default async function CaseDetailPage({
   params,
@@ -21,7 +22,7 @@ export default async function CaseDetailPage({
   const pe = c.plainEnglish;
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-16">
+    <PageWrap narrow className="py-12 md:py-16">
       <Link href="/cases" className="text-sm text-mute hover:text-ink">
         ← Case library
       </Link>
@@ -202,7 +203,7 @@ export default async function CaseDetailPage({
       </section>
 
       <CaseEngagement caseId={c.id} />
-    </div>
+    </PageWrap>
   );
 }
 

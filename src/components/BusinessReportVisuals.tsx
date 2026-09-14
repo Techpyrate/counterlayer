@@ -130,7 +130,7 @@ export function ScanVisualReport({ scan }: { scan: SiteScanResult }) {
         </p>
       </div>
 
-      <div className="grid gap-4 p-5 sm:grid-cols-2 sm:p-8 lg:grid-cols-5">
+      <div className="grid gap-4 p-5 sm:grid-cols-2 sm:p-8 lg:grid-cols-3 xl:grid-cols-5">
         <HeroStat
           label="Pages fetched"
           value={String(scan.stats.pagesOk)}
@@ -278,14 +278,14 @@ export function ScanVisualReport({ scan }: { scan: SiteScanResult }) {
           <ChartCard title="Issues by legal theme">
             <div className="h-56">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={domainData} layout="vertical" margin={{ left: 24 }}>
+                <BarChart data={domainData} layout="vertical" margin={{ left: 8, right: 8 }}>
                   <XAxis type="number" allowDecimals={false} stroke="#9fb4ae" fontSize={11} />
                   <YAxis
                     type="category"
                     dataKey="name"
-                    width={110}
+                    width={88}
                     stroke="#9fb4ae"
-                    fontSize={11}
+                    fontSize={10}
                   />
                   <Tooltip contentStyle={tooltipStyle} />
                   <Bar dataKey="value" radius={[0, 8, 8, 0]}>

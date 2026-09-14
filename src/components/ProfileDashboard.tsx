@@ -354,8 +354,8 @@ export function ProfileDashboard() {
 
   return (
     <div className="space-y-10">
-      <header className="flex flex-col gap-6 border-b border-[var(--line)] pb-8 sm:flex-row sm:items-end sm:justify-between">
-        <div className="flex items-center gap-4">
+      <header className="flex flex-col gap-6 border-b border-[var(--line)] pb-8 md:flex-row md:items-end md:justify-between">
+        <div className="flex min-w-0 items-center gap-4">
           <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-ink text-xl font-bold text-fog">
             {user.photoUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
@@ -368,22 +368,22 @@ export function ProfileDashboard() {
               initials(user.name)
             )}
           </div>
-          <div>
+          <div className="min-w-0">
             <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-signal-dim">
               Account
             </p>
             <h1 className="font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight text-ink sm:text-4xl">
               {user.name}
             </h1>
-            <p className="mt-1 text-sm text-ink-soft">{user.email}</p>
+            <p className="mt-1 break-all text-sm text-ink-soft">{user.email}</p>
             <p className="mt-1 text-xs text-mute">
               Member since {new Date(user.createdAt).toLocaleDateString()}
               {usesGoogle && " · Google sign-in"}
             </p>
           </div>
         </div>
-        <div className="flex flex-col gap-4 sm:items-end">
-          <div className="w-full min-w-[240px] sm:w-auto">
+        <div className="flex w-full min-w-0 flex-col gap-4 md:w-auto md:items-end">
+          <div className="w-full min-w-0 md:max-w-xs">
             <label className="block text-xs font-medium text-mute">Your role</label>
             <div className="mt-1.5 flex gap-2">
               <select
@@ -392,7 +392,7 @@ export function ProfileDashboard() {
                 onChange={(e) =>
                   void onRoleChange(e.target.value as ProfileRole | "")
                 }
-                className="min-w-[180px] flex-1 rounded-xl border border-[var(--line)] bg-paper px-3 py-2.5 text-sm font-medium text-ink outline-none focus:ring-2 focus:ring-signal/30 disabled:opacity-50 sm:min-w-[220px]"
+                className="min-w-0 flex-1 rounded-xl border border-[var(--line)] bg-paper px-3 py-2.5 text-sm font-medium text-ink outline-none focus:ring-2 focus:ring-signal/30 disabled:opacity-50"
               >
                 <option value="">Select role…</option>
                 {profileRoles.map((r) => (
@@ -465,7 +465,7 @@ export function ProfileDashboard() {
         </Link>
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,340px)_1fr]">
+      <div className="grid gap-8 xl:grid-cols-[minmax(0,340px)_1fr]">
         <div className="space-y-6">
           <section className="rounded-2xl border border-[var(--line)] bg-white p-5 sm:p-6">
             <h2 className="text-sm font-semibold uppercase tracking-wider text-mute">
@@ -786,7 +786,9 @@ function ScanRowBody({
           <span className="text-[10px] font-medium text-signal-dim">Watch on</span>
         )}
       </div>
-      <p className="mt-1 font-medium text-ink group-hover:underline">{title}</p>
+      <p className="mt-1 break-all font-medium text-ink group-hover:underline">
+        {title}
+      </p>
       <p className="mt-0.5 text-sm text-ink-soft">{summary}</p>
       <p className="mt-1 text-xs text-mute">
         {new Date(date).toLocaleString()}

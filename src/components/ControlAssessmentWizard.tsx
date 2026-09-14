@@ -633,7 +633,9 @@ export function ControlAssessmentWizard() {
                   key={s.id}
                   className="flex flex-wrap items-center justify-between gap-2 px-4 py-3 text-sm"
                 >
-                  <span className="font-medium text-ink">{s.url}</span>
+                  <span className="min-w-0 break-all font-medium text-ink">
+                    {s.url}
+                  </span>
                   <span className="text-mute">
                     {new Date(s.assessedAt).toLocaleDateString()} · {s.overall} ·{" "}
                     {s.score}

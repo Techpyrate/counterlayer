@@ -8,12 +8,7 @@ export default function HomePage() {
 
   return (
     <div className="pb-8 lg:pb-0">
-      {/* Always visible proof the new build is live */}
-      <div className="bg-signal px-4 py-2 text-center text-xs font-bold tracking-wide text-ink lg:hidden">
-        NEW MOBILE BUILD · {cases.length} cases · tap Menu top-right
-      </div>
-
-      {/* Phone / tablet portrait — visible until lg (1024). Survives Safari “desktop site”. */}
+      {/* Phone / tablet — visible until lg (1024). Survives Safari “desktop site”. */}
       <section className="cl-m-hero lg:hidden">
         <div className="cl-m-hero__glow" aria-hidden />
         <p className="cl-m-hero__brand">CounterLayer</p>
@@ -82,9 +77,9 @@ export default function HomePage() {
       {/* Large desktop only */}
       <section className="relative hidden overflow-hidden border-b border-[var(--line)] lg:block">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_20%,rgba(47,214,123,0.15),transparent_55%)]" />
-        <div className="relative mx-auto w-full max-w-[1600px] px-4 pb-16 pt-12 sm:px-6 sm:pb-24 sm:pt-20 lg:px-10 md:pb-28 md:pt-24">
+        <div className="relative mx-auto w-full max-w-[min(100%,1600px)] px-4 pb-16 pt-12 sm:px-6 sm:pb-24 sm:pt-20 lg:px-8 xl:px-10 md:pb-28 md:pt-24">
           <div className="animate-rise">
-            <p className="font-[family-name:var(--font-display)] text-5xl font-extrabold leading-[0.95] tracking-tight text-ink md:text-7xl lg:text-8xl">
+            <p className="font-[family-name:var(--font-display)] text-5xl font-extrabold leading-[0.95] tracking-tight text-ink xl:text-7xl 2xl:text-8xl">
               CounterLayer
             </p>
             <div className="mt-4 h-1 w-28 bg-signal signal-bar" />
@@ -129,7 +124,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto hidden w-full max-w-[1600px] px-4 py-12 lg:block lg:px-10">
+      <section className="mx-auto hidden w-full max-w-[min(100%,1600px)] px-4 py-12 lg:block lg:px-8 xl:px-10">
         <SectionLabel>Competition Watch</SectionLabel>
         <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-bold text-ink md:text-4xl">
           What do you need?
@@ -215,7 +210,7 @@ export default function HomePage() {
       </section>
 
       <section className="border-t border-[var(--line)] bg-ink text-fog">
-        <div className="mx-auto w-full max-w-[1600px] px-4 py-12 sm:px-6 lg:px-10 md:py-20">
+        <div className="mx-auto w-full max-w-[min(100%,1600px)] px-4 py-12 sm:px-6 lg:px-8 xl:px-10 md:py-20">
           <SectionLabel>
             <span className="text-signal">What we are</span>
           </SectionLabel>

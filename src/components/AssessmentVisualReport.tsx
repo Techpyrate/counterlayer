@@ -320,12 +320,13 @@ export function AssessmentVisualReport({
       className="overflow-hidden rounded-sm border border-[var(--line)] bg-white shadow-sm"
     >
       {/* Report toolbar */}
-      <div className="sticky top-0 z-20 flex flex-wrap items-center justify-between gap-3 border-b border-[var(--line)] bg-white/95 px-4 py-3 backdrop-blur sm:px-6">
-        <div>
+      <div className="sticky top-0 z-20 flex flex-col gap-3 border-b border-[var(--line)] bg-white/95 px-4 py-3 backdrop-blur sm:px-6">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+        <div className="min-w-0">
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-mute">
             Compliance scan report
           </p>
-          <p className="text-sm font-semibold text-ink">{host}</p>
+          <p className="break-all text-sm font-semibold text-ink">{host}</p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
           {!readOnly && (
@@ -333,9 +334,10 @@ export function AssessmentVisualReport({
               <button
                 type="button"
                 onClick={() => setDownloadOpen((v) => !v)}
-                className="rounded-full bg-ink px-4 py-2 text-sm font-semibold text-fog"
+                className="rounded-full bg-ink px-3 py-2 text-xs font-semibold text-fog sm:px-4 sm:text-sm"
               >
-                Download report
+                Download
+                <span className="hidden sm:inline"> report</span>
               </button>
               {downloadOpen && (
                 <div className="absolute right-0 z-30 mt-2 w-64 rounded-xl border border-[var(--line)] bg-white p-2 shadow-lg">
@@ -388,45 +390,44 @@ export function AssessmentVisualReport({
               <button
                 type="button"
                 onClick={() => void handleShareLink()}
-                className="rounded-full border border-[var(--line)] bg-paper px-4 py-2 text-sm font-semibold text-ink"
+                className="rounded-full border border-[var(--line)] bg-paper px-3 py-2 text-xs font-semibold text-ink sm:px-4 sm:text-sm"
               >
-                {shareState === "link"
-                  ? "Link copied"
-                  : "Copy share link"}
+                {shareState === "link" ? "Link copied" : "Share link"}
               </button>
               <button
                 type="button"
                 onClick={() => void handleEnableWatch()}
-                className="rounded-full border border-[var(--line)] bg-paper px-4 py-2 text-sm font-semibold text-ink"
+                className="rounded-full border border-[var(--line)] bg-paper px-3 py-2 text-xs font-semibold text-ink sm:px-4 sm:text-sm"
               >
-                Watch policy pages
+                Watch pages
               </button>
               <button
                 type="button"
                 onClick={() => void handleCheckWatch()}
-                className="rounded-full border border-[var(--line)] bg-paper px-4 py-2 text-sm font-semibold text-ink"
+                className="rounded-full border border-[var(--line)] bg-paper px-3 py-2 text-xs font-semibold text-ink sm:px-4 sm:text-sm"
               >
-                Check for changes
+                Check changes
               </button>
             </>
           )}
           <button
             type="button"
             onClick={() => void handleShare()}
-            className="rounded-full border border-[var(--line)] bg-paper px-4 py-2 text-sm font-semibold text-ink"
+            className="rounded-full border border-[var(--line)] bg-paper px-3 py-2 text-xs font-semibold text-ink sm:px-4 sm:text-sm"
           >
             {shareState === "copied"
-              ? "Copied summary"
+              ? "Copied"
               : shareState === "shared"
                 ? "Shared"
                 : "Share summary"}
           </button>
         </div>
+        </div>
         {shareUrl && (
-          <p className="mt-2 break-all text-xs text-mute">{shareUrl}</p>
+          <p className="break-all text-xs text-mute">{shareUrl}</p>
         )}
         {watchMsg && (
-          <p className="mt-2 max-w-xl text-xs text-ink-soft">{watchMsg}</p>
+          <p className="max-w-xl text-xs text-ink-soft">{watchMsg}</p>
         )}
       </div>
 
@@ -434,7 +435,7 @@ export function AssessmentVisualReport({
         <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-signal">
           CounterLayer · Pro compliance scan
         </p>
-        <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight sm:text-4xl">
+        <h2 className="mt-3 break-all font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight sm:text-4xl">
           {host}
         </h2>
         <p className="mt-2 break-all text-sm text-fog/60">{assessment.url}</p>
@@ -573,7 +574,7 @@ export function AssessmentVisualReport({
               ))}
             </div>
 
-            <div className="mt-4 grid gap-2 sm:grid-cols-3">
+            <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
               {(
                 [
                   ["Partial", assessment.stats.partial],
@@ -702,7 +703,7 @@ export function AssessmentVisualReport({
                       </span>
                       <div className="min-w-0 flex-1">
                         <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                          <span className="font-mono text-xs font-semibold text-ink">
+                          <span className="break-all font-mono text-xs font-semibold text-ink">
                             {c.pluginId}
                           </span>
                           {c.launchCritical && (
@@ -772,7 +773,7 @@ export function AssessmentVisualReport({
                           key={d.pluginId}
                           className="border-b border-[var(--line)]/50"
                         >
-                          <td className="px-4 py-2.5 font-mono">
+                          <td className="break-all px-4 py-2.5 font-mono">
                             {d.improved ? "↑ " : "↓ "}
                             {d.pluginId}
                           </td>
@@ -839,7 +840,7 @@ export function AssessmentVisualReport({
             <div className="sticky top-0 flex items-start justify-between gap-4 border-b border-[var(--line)] bg-white px-5 py-4 sm:px-6">
               <div>
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-mono text-xs font-semibold text-ink">
+                  <span className="break-all font-mono text-xs font-semibold text-ink">
                     {selectedControl.pluginId}
                   </span>
                   <span

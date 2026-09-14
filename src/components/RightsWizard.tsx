@@ -115,7 +115,7 @@ export function RightsWizard({
           </div>
         </section>
 
-        <section className="grid gap-6 md:grid-cols-3">
+        <section className="grid gap-6 lg:grid-cols-3">
           <div>
             <h2 className="text-sm font-semibold uppercase tracking-wider text-mute">
               Jurisdiction focus

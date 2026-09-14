@@ -117,7 +117,8 @@ function SellerCheckTool() {
             {results.map((r) => (
               <li key={r.url} className="px-5 py-4">
                 <div className="flex flex-wrap items-center gap-2">
-                  <p className="font-medium text-ink">{r.url}</p>
+                  <p className="min-w-0 break-all font-medium text-ink">{r.url}</p>
+
                   {r.error ? (
                     <span className="text-xs text-danger">{r.error}</span>
                   ) : (

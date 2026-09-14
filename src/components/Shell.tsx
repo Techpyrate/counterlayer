@@ -14,12 +14,16 @@ import {
   PRODUCT_TAGLINE,
 } from "@/lib/positioning";
 
-const desktopLinks = [
+const desktopPrimary = [
   { href: "/consumers", label: "Consumers" },
   { href: "/report", label: "Report" },
   { href: "/check", label: "Business Scan" },
-  { href: "/assess", label: "Compliance Scan" },
+  { href: "/assess", label: "Compliance" },
+  { href: "/cases", label: "Library" },
   { href: "/pricing", label: "Pricing" },
+];
+
+const desktopSecondary = [
   { href: "/seller-check", label: "Seller check" },
   { href: "/rights", label: "My Rights" },
   { href: "/file", label: "File" },
@@ -27,7 +31,6 @@ const desktopLinks = [
   { href: "/companies", label: "Companies" },
   { href: "/ongoing", label: "Live" },
   { href: "/power", label: "Power" },
-  { href: "/cases", label: "Library" },
 ];
 
 function AuthQueryOpener() {
@@ -90,11 +93,43 @@ export function Nav() {
             </Link>
           </div>
 
-          <div className="hidden items-center gap-3 lg:flex">
-            <nav className="flex flex-wrap items-center justify-end gap-1">
-              {desktopLinks.map((l) => (
+          <div className="hidden min-w-0 items-center gap-2 xl:gap-3 lg:flex">
+            <nav
+              className="flex min-w-0 flex-wrap items-center justify-end gap-0.5 xl:gap-1"
+              aria-label="Main"
+            >
+              {desktopPrimary.map((l) => (
                 <DesktopNavLink key={l.href} href={l.href} label={l.label} />
               ))}
+              {/* Full secondary set on wide desktops */}
+              <span className="hidden 2xl:contents">
+                {desktopSecondary.map((l) => (
+                  <DesktopNavLink key={l.href} href={l.href} label={l.label} />
+                ))}
+              </span>
+              {/* Compact “More” on laptop / mid desktop */}
+              <details className="relative 2xl:hidden">
+                <summary className="cursor-pointer list-none rounded-md px-2.5 py-1.5 text-sm text-ink-soft/80 marker:content-none hover:bg-fog-deep/60 hover:text-ink [&::-webkit-details-marker]:hidden">
+                  More
+                </summary>
+                <div className="absolute right-0 z-50 mt-2 w-48 rounded-xl border border-[var(--line)] bg-paper p-1.5 shadow-lg">
+                  {desktopSecondary.map((l) => (
+                    <Link
+                      key={l.href}
+                      href={l.href}
+                      className="block rounded-lg px-3 py-2 text-sm text-ink-soft hover:bg-fog hover:text-ink"
+                    >
+                      {l.label}
+                    </Link>
+                  ))}
+                  <Link
+                    href="/menu"
+                    className="mt-1 block rounded-lg border-t border-[var(--line)] px-3 py-2 text-sm font-semibold text-ink hover:bg-fog"
+                  >
+                    All pages
+                  </Link>
+                </div>
+              </details>
             </nav>
             <AuthNavControls />
           </div>
@@ -120,7 +155,7 @@ function DesktopNavLink({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
-      className={`rounded-md px-2.5 py-1.5 text-sm transition ${
+      className={`rounded-md px-2 py-1.5 text-xs transition xl:px-2.5 xl:text-sm ${
         active
           ? "bg-ink text-fog"
           : "text-ink-soft/80 hover:bg-fog-deep/60 hover:text-ink"

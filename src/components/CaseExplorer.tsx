@@ -34,7 +34,7 @@ type Props = {
 };
 
 const selectClass =
-  "w-full rounded-lg border border-[var(--line)] bg-paper px-2.5 py-1.5 text-sm";
+  "w-full min-w-0 rounded-lg border border-[var(--line)] bg-paper px-2.5 py-1.5 text-sm";
 
 export function CaseExplorer({
   mode = "all",
@@ -124,7 +124,7 @@ export function CaseExplorer({
         <SectionLabel>Case library</SectionLabel>
       )}
 
-      <h1 className="mt-3 font-[family-name:var(--font-display)] text-4xl font-bold text-ink md:text-5xl">
+      <h1 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-bold text-ink sm:text-4xl md:text-5xl">
         {title ??
           (liveOnly ? `${pool.length} live matters` : "Precedent desk")}
       </h1>
@@ -140,7 +140,7 @@ export function CaseExplorer({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search by company, market, conduct, outcome…"
-          className="min-w-0 flex-1 rounded-xl border border-[var(--line)] bg-paper/90 px-4 py-3 text-base outline-none ring-signal/30 focus:ring-2"
+          className="min-w-0 w-full flex-1 rounded-xl border border-[var(--line)] bg-paper/90 px-4 py-3 text-base outline-none ring-signal/30 focus:ring-2"
         />
         <div className="flex shrink-0 items-center gap-2">
           <button
@@ -166,7 +166,7 @@ export function CaseExplorer({
       </p>
 
       {showFilters && (
-        <div className="mt-3 grid grid-cols-2 gap-2 rounded-xl border border-[var(--line)] bg-paper/70 p-3 md:grid-cols-3 lg:grid-cols-6">
+        <div className="mt-3 grid grid-cols-1 gap-2 rounded-xl border border-[var(--line)] bg-paper/70 p-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
           <label className="block text-[11px] font-semibold uppercase tracking-wider text-mute">
             Jurisdiction
             <select

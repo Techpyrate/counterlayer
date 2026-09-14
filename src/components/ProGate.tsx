@@ -4,6 +4,7 @@ import { type ReactNode, useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/lib/auth";
 import type { PlanTier } from "@/lib/plans";
+import { PageWrap } from "@/components/PageWrap";
 
 export type PlanInfo = {
   plan: PlanTier;
@@ -97,15 +98,16 @@ export function ProGate({
 
   if (authLoading || planLoading) {
     return (
-      <div className="py-16 text-center text-sm text-mute">
+      <PageWrap className="py-16 text-center text-sm text-mute">
         Checking access…
-      </div>
+      </PageWrap>
     );
   }
 
   if (!user) {
     return (
-      <div className="mx-auto max-w-xl rounded-2xl border border-[var(--line)] bg-[#f7faf8] p-8 text-center">
+      <PageWrap className="py-10">
+      <div className="mx-auto max-w-xl rounded-2xl border border-[var(--line)] bg-[#f7faf8] p-6 text-center sm:p-8">
         <p className="text-xs font-semibold uppercase tracking-wider text-signal-dim">
           Pro feature
         </p>
@@ -134,12 +136,14 @@ export function ProGate({
           .
         </p>
       </div>
+      </PageWrap>
     );
   }
 
   if (!isPro) {
     return (
-      <div className="mx-auto max-w-xl rounded-2xl border border-signal/30 bg-signal/5 p-8 text-center">
+      <PageWrap className="py-10">
+      <div className="mx-auto max-w-xl rounded-2xl border border-signal/30 bg-signal/5 p-6 text-center sm:p-8">
         <p className="text-xs font-semibold uppercase tracking-wider text-signal-dim">
           Pro required
         </p>
@@ -164,6 +168,7 @@ export function ProGate({
           remains free.
         </p>
       </div>
+      </PageWrap>
     );
   }
 
@@ -182,13 +187,16 @@ export function BusinessGate({
 
   if (authLoading || planLoading) {
     return (
-      <div className="py-16 text-center text-sm text-mute">Checking access…</div>
+      <PageWrap className="py-16 text-center text-sm text-mute">
+        Checking access…
+      </PageWrap>
     );
   }
 
   if (!user) {
     return (
-      <div className="mx-auto max-w-xl rounded-2xl border border-[var(--line)] bg-white p-8 text-center">
+      <PageWrap className="py-10">
+      <div className="mx-auto max-w-xl rounded-2xl border border-[var(--line)] bg-white p-6 text-center sm:p-8">
         <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold text-ink">
           Sign in for {feature}
         </h2>
@@ -199,12 +207,14 @@ export function BusinessGate({
           Sign in
         </Link>
       </div>
+      </PageWrap>
     );
   }
 
   if (!isBusiness && !isAdmin) {
     return (
-      <div className="mx-auto max-w-xl rounded-2xl border border-[var(--line)] bg-white p-8 text-center">
+      <PageWrap className="py-10">
+      <div className="mx-auto max-w-xl rounded-2xl border border-[var(--line)] bg-white p-6 text-center sm:p-8">
         <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold text-ink">
           Business plan required
         </h2>
@@ -219,6 +229,7 @@ export function BusinessGate({
           Upgrade to Business
         </Link>
       </div>
+      </PageWrap>
     );
   }
 
