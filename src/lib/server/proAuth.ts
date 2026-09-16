@@ -1,4 +1,5 @@
 import { adminAuth } from "@/lib/server/firebaseAdmin";
+import { isAdminEmail } from "@/lib/adminAccess";
 import type { PlanTier } from "@/lib/plans";
 import { hasBusinessAccess, hasProAccess } from "@/lib/plans";
 import {
@@ -74,7 +75,8 @@ export async function verifyAuthFromRequest(
 }
 
 function authContextFromRecord(record: UserPlanRecord): AuthContext {
-  const flags = planAccessFlags(record.plan);
+  const plan = isAdminEmail(record.email) ? "admin" : record.plan;
+  const flags = planAccessFlags(plan);
   return {
     uid: record.uid,
     email: record.email,

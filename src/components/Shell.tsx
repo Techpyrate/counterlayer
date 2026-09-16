@@ -7,6 +7,7 @@ import { PageWrap } from "@/components/PageWrap";
 import { AuthNavControls } from "@/components/AuthNavControls";
 import { AuthModal } from "@/components/AuthModal";
 import { MobileTabBar } from "@/components/MobileTabBar";
+import { AdminNavLink } from "@/components/AdminNavLink";
 import { useAuth } from "@/lib/auth";
 import {
   PRODUCT_BOUNDARY_SHORT,
@@ -79,6 +80,7 @@ export function Nav() {
 
           {/* Plain links — work even if JS/CSS chunks fail on phone */}
           <div className="flex shrink-0 items-center gap-2 lg:hidden">
+            <AdminNavLink compact />
             <Link
               href="/profile"
               className="inline-flex h-10 items-center justify-center rounded-xl border border-[var(--line)] bg-fog px-3 text-sm font-bold text-ink"
@@ -131,6 +133,7 @@ export function Nav() {
                 </div>
               </details>
             </nav>
+            <AdminNavLink />
             <AuthNavControls />
           </div>
         </PageWrap>

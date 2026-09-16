@@ -1,4 +1,5 @@
 import { adminDb } from "@/lib/server/firebaseAdmin";
+import { isAdminEmail } from "@/lib/adminAccess";
 import type { PlanStatus, PlanTier, BillingInterval } from "@/lib/plans";
 import {
   PLAN_LIMITS,
@@ -75,11 +76,15 @@ export async function getUserPlan(
   if (db) {
     const snap = await db.collection("users").doc(uid).get();
     if (snap.exists) {
-      return normalizeRecord(uid, normalizedEmail, {
-        ...(snap.data() as Partial<UserPlanRecord>),
+      return promoteAdminEmail(
         uid,
-        email: normalizedEmail,
-      });
+        normalizedEmail,
+        normalizeRecord(uid, normalizedEmail, {
+          ...(snap.data() as Partial<UserPlanRecord>),
+          uid,
+          email: normalizedEmail,
+        }),
+      );
     }
 
     const emailSnap = await db
@@ -95,13 +100,15 @@ export async function getUserPlan(
         email: normalizedEmail,
       });
       await db.collection("users").doc(uid).set(merged, { merge: true });
-      return merged;
+      return promoteAdminEmail(uid, normalizedEmail, merged);
     }
   }
 
   const file = readFileStore();
   const byUid = file.byUid[uid];
-  if (byUid) return normalizeRecord(uid, normalizedEmail, byUid);
+  if (byUid) {
+    return promoteAdminEmail(uid, normalizedEmail, normalizeRecord(uid, normalizedEmail, byUid));
+  }
 
   const byEmail = file.byEmail[normalizedEmail];
   if (byEmail) {
@@ -109,10 +116,27 @@ export async function getUserPlan(
     if (byEmail.uid !== uid) {
       await saveUserPlan(merged);
     }
-    return merged;
+    return promoteAdminEmail(uid, normalizedEmail, merged);
   }
 
-  return normalizeRecord(uid, normalizedEmail, undefined);
+  return promoteAdminEmail(
+    uid,
+    normalizedEmail,
+    normalizeRecord(uid, normalizedEmail, undefined),
+  );
+}
+
+async function promoteAdminEmail(
+  uid: string,
+  email: string,
+  record: UserPlanRecord,
+): Promise<UserPlanRecord> {
+  if (!isAdminEmail(email) || record.plan === "admin") return record;
+  try {
+    return await setAdminPlan(uid, email);
+  } catch {
+    return { ...record, plan: "admin", planStatus: "active" };
+  }
 }
 
 export async function saveUserPlan(record: UserPlanRecord): Promise<void> {

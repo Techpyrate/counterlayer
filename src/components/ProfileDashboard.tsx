@@ -22,6 +22,7 @@ import {
 } from "@/data/profileRoles";
 import { RoleGuideModal } from "@/components/RoleGuideModal";
 import { usePlan } from "@/components/ProGate";
+import { isAdminEmail } from "@/lib/adminAccess";
 import { formatPlanPrice, planLabel } from "@/lib/plans";
 import type { PlanTier } from "@/lib/plans";
 
@@ -487,12 +488,20 @@ export function ProfileDashboard() {
                   </span>
                 )}
               </p>
-              {isAdmin && (
+              {isAdminEmail(user.email) && (
                 <p className="text-sm text-ink-soft">
                   Admin access — all features enabled.
                 </p>
               )}
-              {userPlan === "free" && (
+              {isAdminEmail(user.email) && (
+                <Link
+                  href="/admin"
+                  className="inline-flex rounded-full bg-ink px-4 py-2 text-xs font-semibold text-fog"
+                >
+                  Admin dashboard
+                </Link>
+              )}
+              {userPlan === "free" && !isAdminEmail(user.email) && (
                 <p className="text-sm text-ink-soft">
                   Upgrade for Compliance Scan, cloud history, and exports.
                 </p>
@@ -510,7 +519,7 @@ export function ProfileDashboard() {
                 </p>
               )}
               <div className="flex flex-wrap gap-2 pt-1">
-                {userPlan === "free" && (
+                {userPlan === "free" && !isAdminEmail(user.email) && (
                   <Link
                     href="/pricing"
                     className="rounded-full bg-signal px-4 py-2 text-xs font-semibold text-ink"

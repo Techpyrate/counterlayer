@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { AuthNavControls } from "@/components/AuthNavControls";
+import { AdminNavLink } from "@/components/AdminNavLink";
 import { PageWrap } from "@/components/PageWrap";
 
 const groups = [
@@ -68,6 +69,7 @@ export default function MenuPage() {
           Account
         </p>
         <AuthNavControls />
+        <AdminNavLink className="mt-3 inline-flex rounded-xl bg-signal px-4 py-2.5 text-sm font-bold text-ink" />
         <p className="mt-3 text-xs text-mute">
           Or open{" "}
           <Link href="/profile" className="font-semibold text-ink underline">
